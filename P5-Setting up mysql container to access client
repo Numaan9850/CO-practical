@@ -1,0 +1,37 @@
+1) Launch the Instance as usual (edit inbound and add all traffic)
+
+2)  sudo -i 
+
+3)  sudo apt-get update && sudo apt-get upgrade -y 
+
+4)  sudo apt install docker.io -y
+
+5)  docker pull mysql:latest 
+
+6)  docker run --name mysql_container -e MYSQL_ROOT_PASSWORD=MITALI -p 3306:3306 -d mysql:latest
+
+7)  docker exec -it mysql_container mysql -u root -p       (PUT PASSWORD, THE ONE WHICH YOU HAD PUT ABOVE)
+
+8)  Create a table and insert values in it:-
+CREATE DATABASE HELLO;
+USE HELLO;
+
+CREATE TABLE SUBJECTS (
+	Subject varchar(50),
+	Credit int
+	);
+
+INSERT INTO SUBJECTS (Subject,Credit) VALUES ('ABC', 6), ('XYZ', 7);
+
+Select * From SUBJECTS;
+
+EXIT
+
+9)  sudo apt-get install mysql-client
+
+10)  mysql -u root -h (pubic ip add of ec2) -P3306 -pMITALI     (mysql -u root -h 43.204.143.82 -P3306 -pMITALI)
+
+11) AGAIN READ THE CONTENT:
+USE HELLO;
+SELECT * FROM SUBJECTS;
+
