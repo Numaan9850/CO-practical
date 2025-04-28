@@ -1,0 +1,40 @@
+1) Launch instance as usual
+
+
+2) sudo -i 
+   sudo apt-get update && sudo apt-get upgrade 
+
+3) sudo apt install docker.io -y 
+
+4) mkdir Docimage
+5) cd Docimage
+6) vi dockerfile 
+
+7) Write a script --> :i (to insert) --> press esc:wq to exit 
+
+FROM ubuntu 
+MAINTAINER 20220801063@dypiu.ac.in
+RUN apt-get update
+RUN apt-get install -y nginx
+CMD ["echo", "image created"]
+
+8) cat dockerfile 
+
+NOTE: Search Docker Hub on google and then login to the account using username and password
+
+9) docker build -t image username/name: tag .    (docker build -t image mitali1512/mitali: tag .)
+
+10) docker images
+
+11) docker login  
+(password won’t be visible but will show you “login succeeded”, it means you are into your account)  
+
+12) docker push username/name:tag (docker push mitali1512/mitali:tag)
+
+NOTE: Check in the Docker Hub A/C in repositories section 
+
+13)  docker run username/name:tag  (docker run mitali1512/mitali:tag)
+
+14) docker container ls -a
+
+15) docker rm container-id 
