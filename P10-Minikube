@@ -1,0 +1,36 @@
+1) Launch instance as usual but make sure it should be T3.medium and paste the script at the end
+#!/bin/bash
+sudo apt-get update -y
+sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+
+2) Create Non-root User
+- adduser minikubeuser
+- usermod -aG sudo minikubeuser
+- usermod -aG docker minikubeuser
+
+3) Install Basic Dependencies
+- apt update -y
+- apt install -y curl apt-transport-https docker.io
+- systemctl start docker
+- systemctl enable docker
+
+4) Switch to Non-root User
+- su - minikubeuser
+
+5) Install Minikube
+- curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+- sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+6) Install kubectl
+- curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+- chmod +x kubectl
+- sudo mv kubectl /usr/local/bin/
+
+7) Start Minikube
+- minikube start --driver=docker
+
+8) Check status
+- kubectl config view 
