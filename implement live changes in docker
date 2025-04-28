@@ -1,0 +1,31 @@
+1) Launch the instance as usual (Allow all traffic from inbound rules)
+
+2) sudo -i 
+
+3) sudo apt update -y
+
+4) sudo apt install docker.io -y  
+
+5) sudo systemctl start docker  
+
+6) sudo systemctl enable docker 
+
+7) docker –version
+
+8) mkdir ~/my-website
+
+9) cd ~/my-website
+
+10)echo "<h1>Hello from Mitali</h1>" > index.html
+
+11) 
+docker run -d \
+--name my-nginx \
+-p 80:80 \
+-v ~/my-website:/usr/share/nginx/html \
+nginx:latest
+
+12) Now, open your browser and paste the public ipv4 of your instance - http://<your-public-ip> 
+
+13) 
+echo "<h1>Updated content</h1>" > ~/my-website/index.html
