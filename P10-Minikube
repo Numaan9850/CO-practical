@@ -1,4 +1,4 @@
-1) Launch instance as usual but make sure it should be T3.medium and paste the script at the end
+1) Launch instance as usual just note it should be t2.medium and paste this script
 #!/bin/bash
 sudo apt-get update -y
 sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
@@ -6,31 +6,25 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 
-2) Create Non-root User
-- adduser minikubeuser
-- usermod -aG sudo minikubeuser
-- usermod -aG docker minikubeuser
+2) sudo apt update && sudo apt upgrade -y
 
-3) Install Basic Dependencies
-- apt update -y
-- apt install -y curl apt-transport-https docker.io
-- systemctl start docker
-- systemctl enable docker
+3) sudo apt install -y curl wget apt-transport-https ca-certificates gnupg lsb-release conntrack
 
-4) Switch to Non-root User
-- su - minikubeuser
+4) sudo apt install -y docker.io
 
-5) Install Minikube
-- curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-- sudo install minikube-linux-amd64 /usr/local/bin/minikube
+5) sudo usermod -aG docker $USER
+# (Then logout and login again or run `newgrp docker`)
 
-6) Install kubectl
-- curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-- chmod +x kubectl
-- sudo mv kubectl /usr/local/bin/
+6) curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 
-7) Start Minikube
-- minikube start --driver=docker
+7) sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
-8) Check status
-- kubectl config view 
+8) curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+9) chmod +x kubectl
+10) sudo mv kubectl /usr/local/bin/
+
+11) minikube start --driver=docker
+12) minikube status
+13) kubectl get nodes
+
+14) kubectl config view
