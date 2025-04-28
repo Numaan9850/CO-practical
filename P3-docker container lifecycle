@@ -1,0 +1,20 @@
+Step 2: Connect the EC2 Instance and run the following commands:
+1. Switch to root user
+- sudo -i
+2. Update and upgrade system packages
+- sudo apt-get update && sudo apt-get upgrade -y
+3. Install Docker sudo apt install
+- docker.io -y
+4. Run an Nginx container
+- docker run -d --name container-nginx -p 3000:80 nginx
+5. Run an Apache2 container
+- docker run -d --name container-apache2 -p 3001:80 ubuntu/apache2
+6. List all containers
+- docker container ls -a
+NOTE: inbound rule should be in all traffic
+7. Copy the ipv4 and port (ipv4:port)
+8. Now to stop, start, kill and prune, run the following commands:
+- docker stop (container-Id)
+- docker start (container-Id)
+- docker kill (container-Id)
+- docker container prune (container-Id)
