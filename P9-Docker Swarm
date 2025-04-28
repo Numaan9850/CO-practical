@@ -1,0 +1,33 @@
+1) Launch 4 instances as usual and add a script at the end
+#!/bin/bash
+apt update -y
+apt install -y apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+apt update -y
+apt install -y docker-ce
+systemctl enable docker
+systemctl start docker
+
+2) Edit inbound rules, all traffic
+
+3) CONNECT TO ALL 4 INSTANCES:
+
+On Instance 1 terminal, run: 
+• docker swarm init 
+• sudo docker swarm join-token manager  (to get the manager token)
+
+On 2nd Instance: Join INSTANCE 2 AS MANAGER 
+Paste the Manager token from Instance 1  
+
+On 3rd and 4th Instance: Join INSTANCE 3 and 4 AS WORKER 
+Paste the Worker token from Instance 1 
+
+4) Perform Operations on Instance 1: 
+• docker node ls  (View all nodes)
+• docker node promote <worker-hostname>  (Promote Worker Node)
+• docker node demote <manager-hostname>  (Demote Manager Node)
+
+5) 
+Now, Check the status of Worker node and Manager node 
+Manager node should be demoted & Worker node should be promoted 
