@@ -21,8 +21,11 @@ CMD ["echo", "image created"]
 8) cat dockerfile 
 
 NOTE: Search Docker Hub on google and then login to the account using username and password
+LOGIN USING GOOGLE
+Click on Profile and note the username
+Then go to password and change the password the link will be send on the respective email id
 
-9) docker build -t image username/name: tag .    (docker build -t image mitali1512/mitali: tag .)
+9) docker build -t image username/name:tag .    (docker build -t image mitali1512/mitali:tag .)
 
 10) docker images
 
@@ -37,4 +40,4 @@ NOTE: Check in the Docker Hub A/C in repositories section
 
 14) docker container ls -a
 
-15) docker rm container-id 
+15) docker rm container-id  
