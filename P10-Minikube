@@ -1,4 +1,5 @@
-1) Launch instance as usual just note it should be t2.medium and paste this script
+1) Launch instance as usual just note it should be t2.medium and paste this script and edit inbound to all traffic
+
 #!/bin/bash
 sudo apt-get update -y
 sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
@@ -6,25 +7,41 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 
-2) sudo apt update && sudo apt upgrade -y
+2) sudo apt-get update -y && sudo apt-get upgrade -y
 
 3) sudo apt install -y curl wget apt-transport-https ca-certificates gnupg lsb-release conntrack
 
-4) sudo apt install -y docker.io
 
-5) sudo usermod -aG docker $USER
-# (Then logout and login again or run `newgrp docker`)
+4) curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker.gpg
 
-6) curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+5)
+echo \
+  "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update -y
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
-7) sudo install minikube-linux-amd64 /usr/local/bin/minikube
+6) sudo usermod -aG docker $USER
 
-8) curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-9) chmod +x kubectl
-10) sudo mv kubectl /usr/local/bin/
+7) newgrp docker
 
-11) minikube start --driver=docker
-12) minikube status
-13) kubectl get nodes
+8) curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 
-14) kubectl config view
+9) sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+
+10) curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+11) chmod +x kubectl
+
+12) sudo mv kubectl /usr/local/bin/
+
+13) Start Minikube using Docker
+
+14) minikube start --driver=docker
+
+15) minikube status
+
+16) kubectl get nodes
+
+17) kubectl config view
